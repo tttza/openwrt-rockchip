@@ -107,8 +107,8 @@ jobs:
         run: |
           cd openwrt
           let make_process=$(nproc)+1
-          make package/network/config/qosify/compile -j${make_process}
-          make package/kernel/bpf-headers/compile -j${make_process}
+          make package/network/config/qosify/compile -j${make_process} V=s
+          make package/kernel/bpf-headers/compile -j${make_process} V=s
 
 
       - name: Compile OpenWRT for R4S
