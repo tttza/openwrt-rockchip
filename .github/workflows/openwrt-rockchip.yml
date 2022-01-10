@@ -130,7 +130,7 @@ jobs:
         run: |
           cd openwrt
           let make_process=$(nproc)+1
-          make -j${make_process} V=s || make -j${make_process} V=s
+          make -j${make_process} || make -j${make_process} V=s
 
       - name: If compile openwrt Error
         if: steps.compileopenwrt.outcome == 'failure'
@@ -243,7 +243,7 @@ jobs:
           cat ../seed/r4s_custom.seed >> .config
           make defconfig
           let make_process=$(nproc)+1
-          make -j${make_process} V=s || make -j${make_process} V=s
+          make -j${make_process} || make -j${make_process} V=s
 
       - name: If compile openwrt 5.14 Error
         if: steps.compile514.outcome == 'failure'
