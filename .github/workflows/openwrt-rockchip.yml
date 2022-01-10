@@ -78,6 +78,12 @@ jobs:
         run: |
           git clone -b master --single-branch https://git.openwrt.org/openwrt/openwrt.git openwrt
 
+      - name: Test buliding package
+        run: |
+          cd openwrt
+          make package/network/config/qosify compile
+          make package/kernel/bpf-headers compile
+
       - name: Prepare openwrt
         run: |
           cd openwrt
