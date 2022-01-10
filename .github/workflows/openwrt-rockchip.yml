@@ -90,13 +90,6 @@ jobs:
           cd openwrt
           /bin/bash 01-prepare_package.sh
 
-      - name: Test buliding package
-        run: |
-          cd openwrt
-          let make_process=$(nproc)+1
-          make package/network/config/qosify/compile -j${make_process}
-          make package/kernel/bpf-headers/compile -j${make_process}
-
       - name: Add ACL
         run: |
           cd openwrt
@@ -109,6 +102,13 @@ jobs:
           cat ../seed/r4s_custom.seed >> .config
           make defconfig
           cp .config  rockchip_multi.config
+
+      - name: Test buliding package
+        run: |
+          cd openwrt
+          let make_process=$(nproc)+1
+          make package/network/config/qosify/compile -j${make_process}
+          make package/kernel/bpf-headers/compile -j${make_process}
 
 
       - name: Compile OpenWRT for R4S
