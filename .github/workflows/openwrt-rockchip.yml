@@ -79,13 +79,6 @@ jobs:
         run: |
           git clone -b master --single-branch https://git.openwrt.org/openwrt/openwrt.git openwrt
 
-      - name: Test buliding package
-        run: |
-          cd openwrt
-          let make_process=$(nproc)+1
-          make package/network/config/qosify/compile -j${make_process}
-          make package/kernel/bpf-headers/compile -j${make_process}
-
       - name: Prepare openwrt
         run: |
           cd openwrt
@@ -96,6 +89,13 @@ jobs:
         run: |
           cd openwrt
           /bin/bash 01-prepare_package.sh
+
+      - name: Test buliding package
+        run: |
+          cd openwrt
+          let make_process=$(nproc)+1
+          make package/network/config/qosify/compile -j${make_process}
+          make package/kernel/bpf-headers/compile -j${make_process}
 
       - name: Add ACL
         run: |
